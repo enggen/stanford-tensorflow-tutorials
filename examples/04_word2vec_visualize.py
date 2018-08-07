@@ -79,7 +79,8 @@ class SkipGramModel:
                                                 num_classes=self.vocab_size), name='loss')
     def _create_optimizer(self):
         """ Step 5: define optimizer """
-        self.optimizer = tf.train.GradientDescentOptimizer(self.lr).minimize(self.loss, 
+        with tf.name_scope('optimizer'):
+            self.optimizer = tf.train.GradientDescentOptimizer(self.lr).minimize(self.loss, 
                                                               global_step=self.global_step)
 
     def _create_summaries(self):
